@@ -1,0 +1,16 @@
+/static StaticR Static appStatic
+/auth   AuthR   Auth   getAuth
+
+/favicon.ico FaviconR GET
+/robots.txt RobotsR GET
+
+/ HomeR GET POST
+/routes RoutesR GET
+SurfacePlots SurfacePlotsR GET POST
+SurfacePlot2 SurfacePlot2R GET POST
+/blog/blog1 Blog1R GET
+ZoomChart ZoomChartR GET POST
+Menu MenuR GET POST
+AutoTech AutoTechR GET POST
+IntelAnnualMACD IntelAnnualMACDR GET
+Draw DrawR GET POST
