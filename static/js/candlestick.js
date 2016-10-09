@@ -4,16 +4,13 @@ function max(a, b){ return a > b ? a : b; }
 function getLB10(a) {return 10  * (Math.floor(a/10))}
 function getLB100(a){return 100 * (Math.floor(a/100))}
 function getUB10(a) {return 10  * (Math.ceil(a/10))}
-function getUB100(a){return 100 * (Math.ceil(a/100))}          //finding round number levels
+function getUB100(a){return 100 * (Math.ceil(a/100))}          //for finding round number levels
 
 function addSpreadToData(data){
     for (var i=0;i<data.length;i++){
         data[i].spread=parseFloat(dataDaily.Ask)-parseFloat(dataDaily.Bid)
     }
-    //console.log("AFTER appending spread");
-    //console.log(data);
-    //console.log(dataDaily.Bid);
-} //adds some data derived from last days daily data to all history-data
+}
 
 function buildChart(data){
     addSpreadToData(data);
@@ -918,10 +915,10 @@ function drawResist2b(){
 	  	for(var i=tdResArray2.length-1;i>=0;i--){
 		  	for(var q= 0;q<i;q++){
 			  	var subArray=[]
-				  for (var j=0;j<=tdResArray2.length-1-i-q;j++){
+				for (var j=0;j<=tdResArray2.length-1-i-q;j++){
 					  subArray[j]=tdResArray2[tdResArray2.length-j-1-q]
-				  }
-				  lr = linearRegression(subArray.map(function(d){return Number(d.High);}),subArray.map(function(d){return parseInt(dateFormat.parse(d.Date).getTime()/8.64e7);}))   //.getTime()/8.64e7   returns number of days since 1970/01/01
+				}
+				lr = linearRegression(subArray.map(function(d){return Number(d.High);}),subArray.map(function(d){return parseInt(dateFormat.parse(d.Date).getTime()/8.64e7);}))   //.getTime()/8.64e7   returns number of days since 1970/01/01
           if(lr.scoreRes>bestScore && subArray.length>2){
             bestScore = lr.scoreRes
             bestLR = lr
@@ -992,7 +989,7 @@ function drawResist2b(){
       //////////////////TD_POINT LINE DRAWING/////////////////
 
 	    var y1CoordTD= (height-2*margin) - ( (height-2*margin) * ( (finalTDResistArray.map(function(d){return Number(d.High);})[finalTDResistArray.length-1]-d3.min(data.map(function(d){return Number(d.Low);})) ) / yRange ))
-		  var x1CoordTD= (width-3*margin) * ( ( parseInt(dateFormat.parse(finalTDResistArray.map(function(d){return d.Date;})[finalTDResistArray.length-1]).getTime()/8.64e7) - parseInt(dateFormat.parse(data.map(function(d){return d.Date;})[0]).getTime()/8.64e7) ) / xRange )
+        	  var x1CoordTD= (width-3*margin) * ( ( parseInt(dateFormat.parse(finalTDResistArray.map(function(d){return d.Date;})[finalTDResistArray.length-1]).getTime()/8.64e7) - parseInt(dateFormat.parse(data.map(function(d){return d.Date;})[0]).getTime()/8.64e7) ) / xRange )
 		  var y2CoordTD= (height-2*margin) - ( (height-2*margin) * ( (finalTDResistArray.map(function(d){return Number(d.High);})[0]-d3.min(data.map(function(d){return Number(d.Low);})) ) / yRange ))
 		  var x2CoordTD= (width-3*margin) * ( ( parseInt(dateFormat.parse(finalTDResistArray.map(function(d){return d.Date;})[0]).getTime()/8.64e7) - parseInt(dateFormat.parse(data.map(function(d){return d.Date;})[0]).getTime()/8.64e7) ) / xRange )
 
@@ -1006,7 +1003,7 @@ function drawResist2b(){
       var x2CoordExtrapolatedTD= (width-margin)
 
 		var chart =d3.select("#chart1").selectAll("svg")
-
+/*
     chart
 		.append("svg")
 		.append("line")
@@ -1017,7 +1014,7 @@ function drawResist2b(){
           .style("stroke-dasharray", ("10,5"))
 		      .attr("stroke", "#3399FF");        //Teal
 
-
+*/
 
       /////DEBUGGING WITH CIRCLES TO SHOW POINT SELECTION/////
 //		for (i = 0;i<finalResistArray.length;i++){
@@ -1319,6 +1316,8 @@ function linearRegression(y,x){
 
         return lr;
 }
+
+// Functions to change the buttons between on and off
 
 function toggleBollinger(){
     currentvalue = document.getElementById('toggleBollinger').value;
